@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Gerenciador.Data;
 using Gerenciador.Dtos;
+using Gerenciador.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
@@ -29,6 +30,12 @@ namespace Gerenciador.Controllers
         {
             var token = await _userDao.LoginUser(dto);
             return Ok(token);
+        }
+        [HttpPost("verifyEmail")]
+        public IActionResult VerifyEmail(VerifyEmail email)
+        {
+            _userDao.VerifyEmail(email);
+            return Ok("Verificado com sucesso");
         }
     }
 }

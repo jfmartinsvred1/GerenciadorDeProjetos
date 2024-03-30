@@ -25,7 +25,7 @@ namespace Gerenciador.Services
                 smtpClient.UseDefaultCredentials = false;
                 smtpClient.Credentials= new NetworkCredential("TestApiJfmartins@outlook.com", "Apiemail123!");
                 emailMessage.From = new MailAddress("TestApiJfmartins@outlook.com", "JJSOFTWARE");
-                emailMessage.Body = $"Confirme seu email na nossa aplicação \n Código: {code}";
+                emailMessage.Body = $"Confirme seu email na nossa aplicação <br> Código: {code}";
                 emailMessage.Subject = "Confirmação de email";
                 emailMessage.IsBodyHtml = true;
                 emailMessage.Priority = MailPriority.Normal;

@@ -13,14 +13,16 @@ namespace Gerenciador.Data.EF
         SignInManager<User> _signInManager;
         TokenService _tokenService;
         EmailService _emailService;
+        GerenciadorContext _context;
 
-        public UserDao(IMapper mapper, UserManager<User> manager, SignInManager<User> signInManager, TokenService tokenService, EmailService emailService)
+        public UserDao(IMapper mapper, UserManager<User> manager, SignInManager<User> signInManager, TokenService tokenService, EmailService emailService, GerenciadorContext context)
         {
             _mapper = mapper;
             _userManager = manager;
             _signInManager = signInManager;
             _tokenService = tokenService;
             _emailService = emailService;
+            _context = context;
         }
 
         public async Task<string> LoginUser(LoginUserDto dto)
@@ -54,6 +56,24 @@ namespace Gerenciador.Data.EF
 
             _emailService.SaveCode(code,dto.Email);
 
+        }
+
+        public void VerifyEmail(VerifyEmail verify)
+        {
+            var resp = _emailService.VerifyCode(verify.Code,verify.Email);
+            if (!resp)
+            {
+                throw new ApplicationException("Algo Deu Errado");
+            }
+            var user = _signInManager
+                .UserManager
+                .Users
+                .FirstOrDefault(user => user.NormalizedUserName == verify.Username.ToUpper());
+
+            user.EmailConfirmed = true;
+
+            _context.Users.Update(user);
+            _context.SaveChanges();
         }
     }
 }

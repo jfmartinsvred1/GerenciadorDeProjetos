@@ -24,6 +24,8 @@ namespace Gerenciador.Services
             var validator =_context.ValidationEmails.FirstOrDefault(x => x.Code == code);
             if (validator.Email == email && validator != null)
             {
+                _context.ValidationEmails.Remove(validator);
+                _context.SaveChanges();
                 return true;
             }
             else
