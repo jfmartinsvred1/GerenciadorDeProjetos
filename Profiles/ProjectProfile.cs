@@ -4,11 +4,11 @@ using Gerenciador.Models;
 
 namespace Gerenciador.Profiles
 {
-    public class USerProfile:Profile
+    public class ProjectProfile:Profile
     {
-        public USerProfile()
+        public ProjectProfile()
         {
-            CreateMap<CreateUserDto, User>();
+            CreateMap<CreateProjectDto, Project>();
         }
     }
 }

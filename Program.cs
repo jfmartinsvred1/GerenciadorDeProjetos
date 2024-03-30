@@ -1,5 +1,6 @@
 using Gerenciador.Data;
 using Gerenciador.Data.EF;
+using Gerenciador.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 var builder = WebApplication.CreateBuilder(args);
@@ -11,7 +12,7 @@ builder.Services.AddDbContext<GerenciadorContext>(opts =>
     opts.UseMySql(connectionString,ServerVersion.AutoDetect(connectionString));
 });
 
-builder.Services.AddIdentity<IdentityUser,IdentityRole>()
+builder.Services.AddIdentity<User,IdentityRole>()
     .AddEntityFrameworkStores<GerenciadorContext>()
     .AddDefaultTokenProviders();
 builder.Services.AddScoped<IUserDao, UserDao>();

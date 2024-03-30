@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Gerenciador.Dtos;
+using Gerenciador.Models;
 using Microsoft.AspNetCore.Identity;
 
 namespace Gerenciador.Data.EF
@@ -7,17 +8,22 @@ namespace Gerenciador.Data.EF
     public class UserDao : IUserDao
     {
         IMapper _mapper;
-        UserManager<IdentityUser> _userManager;
+        UserManager<User> _userManager;
 
-        public UserDao(IMapper mapper, UserManager<IdentityUser> manager)
+        public UserDao(IMapper mapper, UserManager<User> manager)
         {
             _mapper = mapper;
             _userManager = manager;
         }
 
+        public Task<string> LoginUser(LoginUserDto dto)
+        {
+            throw new NotImplementedException();
+        }
+
         public async Task RegisterUser(CreateUserDto dto)
         {
-            IdentityUser user = _mapper.Map<IdentityUser>(dto);
+            User user = _mapper.Map<User>(dto);
             IdentityResult result = await _userManager.CreateAsync(user);
             if(!result.Succeeded)
             {
