@@ -11,20 +11,18 @@ namespace Gerenciador.Controllers
     [ApiController]
     public class ProjectUserController : ControllerBase
     {
-        IMapper _mapper;
-        GerenciadorContext _context;
+        IProjectUserDao _projectUserDao;
 
-        public ProjectUserController(IMapper mapper, GerenciadorContext context)
+        public ProjectUserController(IProjectUserDao projectUserDao)
         {
-            _mapper = mapper;
-            _context = context;
+            _projectUserDao = projectUserDao;
         }
+
         [HttpPost]
-        public void AddUserProject(CreateProjectUserDto dto)
+        public IActionResult AddUserProject(CreateProjectUserDto dto)
         {
-            ProjectUser projectUser = _mapper.Map<ProjectUser>(dto);
-            _context.ProjectsUsers.Add(projectUser);
-            _context.SaveChanges();
+            _projectUserDao.AddUserProject(dto);
+            return Ok("Criado Com Sucesso");
         }
     }
 }

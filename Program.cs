@@ -1,6 +1,7 @@
 using Gerenciador.Data;
 using Gerenciador.Data.EF;
 using Gerenciador.Models;
+using Gerenciador.Services;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 var builder = WebApplication.CreateBuilder(args);
@@ -15,6 +16,11 @@ builder.Services.AddDbContext<GerenciadorContext>(opts =>
 builder.Services.AddIdentity<User,IdentityRole>()
     .AddEntityFrameworkStores<GerenciadorContext>()
     .AddDefaultTokenProviders();
+
+builder.Services.AddScoped<TokenService>();
+builder.Services.AddScoped<IProjectUserDao, ProjectUserDao>();
+builder.Services.AddScoped<IProjectDao, ProjectDao>();
+builder.Services.AddScoped<IStateDao, StateDao>();
 builder.Services.AddScoped<IUserDao, UserDao>();
 
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());

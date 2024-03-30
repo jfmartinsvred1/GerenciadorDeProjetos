@@ -10,21 +10,18 @@ namespace Gerenciador.Controllers
     [Route("[controller]")]
     public class ProjectController:ControllerBase
     {
-        GerenciadorContext _context;
-        IMapper _mapper;
+        IProjectDao _projectDao;
 
-        public ProjectController(GerenciadorContext context, IMapper mapper)
+        public ProjectController(IProjectDao projectDao)
         {
-            _context = context;
-            _mapper = mapper;
+            _projectDao = projectDao;
         }
 
         [HttpPost]
-        public void CreateProject(CreateProjectDto dto)
+        public IActionResult CreateProject(CreateProjectDto dto)
         {
-            Project project= _mapper.Map<Project>(dto);
-            _context.Projects.Add(project);
-            _context.SaveChanges();
+            _projectDao.CreateProject(dto);
+             return Ok("Criado Com Sucesso");
         }
 
     }
