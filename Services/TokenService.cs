@@ -9,15 +9,25 @@ namespace Gerenciador.Services
 {
     public class TokenService
     {
+        private IConfiguration _configuration;
+
+        public TokenService(IConfiguration configuration)
+        {
+            _configuration = configuration;
+        }
+
         public string GenerateToken(User user)
         {
+            
+
             Claim[] claims = new Claim[]
             {
                 new Claim("username", user.UserName),
-                new Claim("id", user.Id)
+                new Claim("id", user.Id),
+                new Claim("emailconfirmed", user.EmailConfirmed.ToString())
             };
 
-            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("FBDUHFBUDHFB876byyuby77yb7YBb7ybt32"));
+            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["SymmetricSecurityKey"]));
 
             var signInCredentials = new SigningCredentials(key,SecurityAlgorithms.HmacSha256);
 
