@@ -9,7 +9,6 @@ namespace Gerenciador.Dtos
         [Required]
         [DataType(DataType.Password)]
         public string Password { get; set; }
-        [Required]
         [Compare("Password")]
         public string Repassword { get; set; }
     }

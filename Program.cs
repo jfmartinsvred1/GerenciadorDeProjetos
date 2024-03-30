@@ -1,18 +1,20 @@
 using Gerenciador.Data;
+using Gerenciador.Data.EF;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-
 var builder = WebApplication.CreateBuilder(args);
 var connectionString = builder.Configuration.GetConnectionString("Default");
+
 // Add services to the container.
 builder.Services.AddDbContext<GerenciadorContext>(opts =>
 {
-    opts.UseSqlServer(connectionString);
+    opts.UseMySql(connectionString,ServerVersion.AutoDetect(connectionString));
 });
 
 builder.Services.AddIdentity<IdentityUser,IdentityRole>()
     .AddEntityFrameworkStores<GerenciadorContext>()
     .AddDefaultTokenProviders();
+builder.Services.AddScoped<IUserDao, UserDao>();
 
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 builder.Services.AddControllers();

@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Gerenciador.Data;
 using Gerenciador.Dtos;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -9,27 +10,19 @@ namespace Gerenciador.Controllers
     [Route("[controller]")]
     public class UserController:ControllerBase
     {
-        private IMapper _mapper;
-        private UserManager<IdentityUser> _userManager;
+        IUserDao _userDao;
 
-        public UserController(IMapper mapper, UserManager<IdentityUser> userManager)
+        public UserController(IUserDao userDao)
         {
-            _mapper = mapper;
-            _userManager = userManager;
+            _userDao = userDao;
         }
 
         [HttpPost]
-        public async Task<IActionResult> RegisterUser(CreateUserDto dto)
+        public async Task<IActionResult> RegisterUserAsync(CreateUserDto dto)
         {
-            IdentityUser user = _mapper.Map<IdentityUser>(dto);
-            
-            IdentityResult result = await _userManager.CreateAsync(user,dto.Password);
+            await _userDao.RegisterUser(dto);
 
-            if (!result.Succeeded)
-            {
-                return Ok("Criado com sucesso");
-            }
-            throw new ApplicationException("Algum Erro");
+            return Ok("Criado com sucesso");
         }
     }
 }
