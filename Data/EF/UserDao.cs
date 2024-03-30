@@ -12,13 +12,15 @@ namespace Gerenciador.Data.EF
         UserManager<User> _userManager;
         SignInManager<User> _signInManager;
         TokenService _tokenService;
+        EmailService _emailService;
 
-        public UserDao(IMapper mapper, UserManager<User> manager, SignInManager<User> signInManager, TokenService tokenService)
+        public UserDao(IMapper mapper, UserManager<User> manager, SignInManager<User> signInManager, TokenService tokenService, EmailService emailService)
         {
             _mapper = mapper;
             _userManager = manager;
             _signInManager = signInManager;
             _tokenService = tokenService;
+            _emailService = emailService;
         }
 
         public async Task<string> LoginUser(LoginUserDto dto)
@@ -48,6 +50,10 @@ namespace Gerenciador.Data.EF
             {
                 throw new ApplicationException("Algo Deu Errado!");
             }
+            var code = Email.SendEmailConfirmation(dto.Email);
+
+            _emailService.SaveCode(code,dto.Email);
+
         }
     }
 }

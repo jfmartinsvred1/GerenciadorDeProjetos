@@ -17,6 +17,7 @@ builder.Services.AddIdentity<User,IdentityRole>()
     .AddEntityFrameworkStores<GerenciadorContext>()
     .AddDefaultTokenProviders();
 
+builder.Services.AddScoped<EmailService>();
 builder.Services.AddScoped<TokenService>();
 builder.Services.AddScoped<IProjectUserDao, ProjectUserDao>();
 builder.Services.AddScoped<IProjectDao, ProjectDao>();
