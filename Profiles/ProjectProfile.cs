@@ -9,6 +9,7 @@ namespace Gerenciador.Profiles
         public ProjectProfile()
         {
             CreateMap<CreateProjectDto, Project>();
+            CreateMap<Project, ReadProjectDto>();
         }
     }
 }

@@ -2,6 +2,7 @@
 using Gerenciador.Data;
 using Gerenciador.Dtos;
 using Gerenciador.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Gerenciador.Controllers
@@ -18,11 +19,17 @@ namespace Gerenciador.Controllers
         }
 
         [HttpPost]
+        [Authorize(Policy = "EmailConfirm")]
         public IActionResult CreateProject(CreateProjectDto dto)
         {
             _projectDao.CreateProject(dto);
              return Ok("Criado Com Sucesso");
         }
 
+        [HttpGet]
+        public ICollection<ReadProjectDto> GetAll(string managerId)
+        {
+            return _projectDao.GetAll(managerId);
+        }
     }
 }

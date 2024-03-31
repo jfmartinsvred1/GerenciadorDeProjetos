@@ -8,5 +8,7 @@ namespace Gerenciador.Data
         Task RegisterUser(CreateUserDto dto);
         Task<string> LoginUser(LoginUserDto dto);
         void VerifyEmail(VerifyEmail verify);
+
+        ICollection<ReadUsersDto> GetUsersIds(string projectId);
     }
 }

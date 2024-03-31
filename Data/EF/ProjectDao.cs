@@ -22,5 +22,11 @@ namespace Gerenciador.Data.EF
             _context.Projects.Add(project);
             _context.SaveChanges();
         }
+
+        public ICollection<ReadProjectDto> GetAll(string managerId)
+        {
+            ICollection<ReadProjectDto> projects = _mapper.Map<ICollection<ReadProjectDto>>(_context.Projects.Where(id=>id.ManagerId==managerId).ToList()); ;
+            return projects;
+        }
     }
 }

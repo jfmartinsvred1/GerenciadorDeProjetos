@@ -4,6 +4,7 @@ using Gerenciador.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Gerenciador.Migrations
 {
     [DbContext(typeof(GerenciadorContext))]
-    partial class GerenciadorContextModelSnapshot : ModelSnapshot
+    [Migration("20240331200955_activity_states")]
+    partial class activity_states
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -54,7 +57,7 @@ namespace Gerenciador.Migrations
                     b.HasIndex("UserId")
                         .IsUnique();
 
-                    b.ToTable("Activities");
+                    b.ToTable("Activity");
                 });
 
             modelBuilder.Entity("Gerenciador.Models.Project", b =>

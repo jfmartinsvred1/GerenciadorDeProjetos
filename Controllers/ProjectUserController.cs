@@ -4,6 +4,7 @@ using Gerenciador.Dtos;
 using Gerenciador.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
 
 namespace Gerenciador.Controllers
 {
@@ -12,10 +13,12 @@ namespace Gerenciador.Controllers
     public class ProjectUserController : ControllerBase
     {
         IProjectUserDao _projectUserDao;
+        IUserDao _userDao;
 
-        public ProjectUserController(IProjectUserDao projectUserDao)
+        public ProjectUserController(IProjectUserDao projectUserDao, IUserDao userDao)
         {
             _projectUserDao = projectUserDao;
+            _userDao = userDao;
         }
 
         [HttpPost]
@@ -24,5 +27,12 @@ namespace Gerenciador.Controllers
             _projectUserDao.AddUserProject(dto);
             return Ok("Criado Com Sucesso");
         }
+        [HttpGet]
+        public ICollection<ReadUsersDto> GetWorkers(string projectId)
+        {
+            return _userDao.GetUsersIds(projectId);
+        }
     }
+
+    
 }

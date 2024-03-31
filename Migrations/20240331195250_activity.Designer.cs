@@ -4,6 +4,7 @@ using Gerenciador.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Gerenciador.Migrations
 {
     [DbContext(typeof(GerenciadorContext))]
-    partial class GerenciadorContextModelSnapshot : ModelSnapshot
+    [Migration("20240331195250_activity")]
+    partial class activity
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -39,9 +42,6 @@ namespace Gerenciador.Migrations
                     b.Property<string>("ProjectId")
                         .HasColumnType("varchar(255)");
 
-                    b.Property<string>("StateId")
-                        .HasColumnType("varchar(255)");
-
                     b.Property<string>("UserId")
                         .HasColumnType("varchar(255)");
 
@@ -49,12 +49,10 @@ namespace Gerenciador.Migrations
 
                     b.HasIndex("ProjectId");
 
-                    b.HasIndex("StateId");
-
                     b.HasIndex("UserId")
                         .IsUnique();
 
-                    b.ToTable("Activities");
+                    b.ToTable("Activity");
                 });
 
             modelBuilder.Entity("Gerenciador.Models.Project", b =>
@@ -102,8 +100,9 @@ namespace Gerenciador.Migrations
 
             modelBuilder.Entity("Gerenciador.Models.State", b =>
                 {
-                    b.Property<string>("StateId")
-                        .HasColumnType("varchar(255)");
+                    b.Property<Guid>("StateId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("char(36)");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -335,17 +334,11 @@ namespace Gerenciador.Migrations
                         .WithMany("Activity")
                         .HasForeignKey("ProjectId");
 
-                    b.HasOne("Gerenciador.Models.State", "State")
-                        .WithMany("Activities")
-                        .HasForeignKey("StateId");
-
                     b.HasOne("Gerenciador.Models.User", "User")
                         .WithOne("Activity")
                         .HasForeignKey("Gerenciador.Models.Activity", "UserId");
 
                     b.Navigation("Project");
-
-                    b.Navigation("State");
 
                     b.Navigation("User");
                 });
@@ -421,11 +414,6 @@ namespace Gerenciador.Migrations
                     b.Navigation("Activity");
 
                     b.Navigation("ProjectsUsers");
-                });
-
-            modelBuilder.Entity("Gerenciador.Models.State", b =>
-                {
-                    b.Navigation("Activities");
                 });
 
             modelBuilder.Entity("Gerenciador.Models.User", b =>
