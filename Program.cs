@@ -18,6 +18,7 @@ builder.Services.AddDbContext<GerenciadorContext>(opts =>
     opts.UseMySql(connectionString,ServerVersion.AutoDetect(connectionString));
 });
 
+
 builder.Services.AddIdentity<User,IdentityRole>()
     .AddEntityFrameworkStores<GerenciadorContext>()
     .AddDefaultTokenProviders();
@@ -72,6 +73,7 @@ if (app.Environment.IsDevelopment())
 
 
 app.UseHttpsRedirection();
+
 
 app.UseAuthentication();
 app.UseAuthorization();

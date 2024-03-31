@@ -8,5 +8,7 @@
         public string ManagerId { get; set; }
         public ICollection<ProjectUser> ProjectsUsers { get; set; }
 
+        public ICollection<Activity> Activity { get; set; }
+
     }
 }
