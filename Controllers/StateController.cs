@@ -22,10 +22,9 @@ namespace Gerenciador.Controllers
             return Ok(dto);
         }
         [HttpGet]
-        public ICollection<ReadStateDto> GetAll(int id) 
+        public ICollection<ReadStateDto> GetAll() 
         {
-            var states= _stateDao.GetAll();
-            return states;
+            return _stateDao.GetAll(); 
         }
     }
 }

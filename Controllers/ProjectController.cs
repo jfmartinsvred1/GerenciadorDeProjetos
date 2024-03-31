@@ -26,5 +26,10 @@ namespace Gerenciador.Controllers
              return Ok("Criado Com Sucesso");
         }
 
+        [HttpGet]
+        public ICollection<ReadProjectDto> GetAll(string managerId)
+        {
+            return _projectDao.GetAll(managerId);
+        }
     }
 }

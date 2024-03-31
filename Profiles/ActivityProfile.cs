@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Gerenciador.Dtos;
 using Gerenciador.Models;
 
 namespace Gerenciador.Profiles
@@ -7,7 +8,8 @@ namespace Gerenciador.Profiles
     {
         public ActivityProfile()
         {
-            CreateMap<Activity, ActivityProfile>();
+            CreateMap<CreateActivityDto, Activity>();
+            CreateMap<Activity, ReadActivityDto>();
         }
     }
 }

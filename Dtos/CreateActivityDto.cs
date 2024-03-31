@@ -13,5 +13,7 @@ namespace Gerenciador.Dtos
         public string? UserId { get; set; }
         [Required]
         public string? ProjectId { get; set; }
+        [Required]
+        public string? StateId { get; set; }
     }
 }

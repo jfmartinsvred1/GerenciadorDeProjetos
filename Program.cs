@@ -33,6 +33,7 @@ builder.Services.AddAuthorization(opts =>
 
 builder.Services.AddScoped<EmailService>();
 builder.Services.AddScoped<TokenService>();
+builder.Services.AddScoped<IActivityDao, ActivityDao>();
 builder.Services.AddScoped<IProjectUserDao, ProjectUserDao>();
 builder.Services.AddScoped<IProjectDao, ProjectDao>();
 builder.Services.AddScoped<IStateDao, StateDao>();
@@ -42,7 +43,8 @@ builder.Services.AddSingleton<IAuthorizationHandler, EmailAuthorization>();
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
 
-builder.Services.AddControllers();
+builder.Services.AddControllers().AddNewtonsoftJson(options =>
+    options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();

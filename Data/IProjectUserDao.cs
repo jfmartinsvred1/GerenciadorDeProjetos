@@ -6,5 +6,7 @@ namespace Gerenciador.Data
     {
         void AddUserProject(CreateProjectUserDto dto);
 
+        List<string> GetAllIdsOfProject(string projectId);
+
     }
 }

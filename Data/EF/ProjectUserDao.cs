@@ -22,5 +22,19 @@ namespace Gerenciador.Data.EF
             _context.ProjectsUsers.Add(projectUserDao);
             _context.SaveChanges();
         }
+
+        public List<string> GetAllIdsOfProject(string projectId)
+        {
+            var projectusers= _context.ProjectsUsers.Where(project=>project.ProjectId == projectId).ToList();
+
+            var ids = new List<string>();
+
+            foreach (var user in projectusers)
+            {
+                ids.Add(user.UserId);
+            }
+
+            return ids;
+        }
     }
 }

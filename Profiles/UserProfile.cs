@@ -9,6 +9,7 @@ namespace Gerenciador.Profiles
         public USerProfile()
         {
             CreateMap<CreateUserDto, User>();
+            CreateMap<User,ReadUsersDto>();
         }
     }
 }

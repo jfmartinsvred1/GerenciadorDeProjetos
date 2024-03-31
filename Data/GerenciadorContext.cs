@@ -15,6 +15,7 @@ namespace Gerenciador.Data
         public DbSet<Project> Projects { get; set; }
         public DbSet<ProjectUser> ProjectsUsers { get; set; }
         public DbSet<ValidationEmail> ValidationEmails { get; set; }
+        public DbSet<Activity> Activities { get; set; }
 
         //protected override void OnModelCreating(ModelBuilder builder)
         //{
