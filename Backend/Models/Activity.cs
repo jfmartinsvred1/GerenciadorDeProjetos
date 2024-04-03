@@ -2,7 +2,7 @@
 {
     public class Activity
     {
-        public Guid ActivityId { get; set; } = Guid.NewGuid();
+        public string ActivityId { get; set; } = Guid.NewGuid().ToString();
         public string Name { get; set; }
         public string Description { get; set; }
         public string? UserId { get; set; }

@@ -11,6 +11,7 @@ using Microsoft.IdentityModel.Tokens;
 using System.Text;
 var builder = WebApplication.CreateBuilder(args);
 var connectionString = builder.Configuration["ConnectionStrings:Default"];
+var myAllowSpecificOrigins = "_var myAllowSpecificOrigins";
 
 // Add services to the container.
 builder.Services.AddDbContext<GerenciadorContext>(opts =>
@@ -18,6 +19,15 @@ builder.Services.AddDbContext<GerenciadorContext>(opts =>
     opts.UseMySql(connectionString,ServerVersion.AutoDetect(connectionString));
 });
 
+builder.Services.AddCors(opts =>
+{
+    opts.AddPolicy(name: myAllowSpecificOrigins, builder =>
+    {
+        builder.WithOrigins("http://127.0.0.1:5500/index.html")
+        .AllowAnyOrigin()
+        .AllowAnyHeader();
+    });
+});
 
 builder.Services.AddIdentity<User,IdentityRole>()
     .AddEntityFrameworkStores<GerenciadorContext>()
@@ -76,6 +86,7 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
+app.UseCors(myAllowSpecificOrigins);
 
 app.UseAuthentication();
 app.UseAuthorization();
