@@ -1,24 +1,30 @@
-import logo from './logo.svg';
+
 import './App.css';
+import Header from './Components/Header/Index';
+import "bootstrap/dist/css/bootstrap.css"
+import Footer from './Components/Footer';
+import { Container } from 'react-bootstrap';
+import Login from './Components/Login';
 
 function App() {
+  let isLogged=false;
+  let user= {
+    username:"jfmartins",
+    name:"João Victor Fernandes Martins"
+  }
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <Header logged={isLogged} user={user}></Header>
+      <div className='bg-secondary p-3'>
+        {/* <Container className='pt-4'>
+        <h2>Site Gerenciador De Projetos</h2>
+        <h4>Aplicativo com objetivo de gerenciar projetos, destinar atividades pendentes a colaboradores do projeto, dashbords e muito mais!</h4>
+        </Container> */}
+        <Login ></Login>
+      </div>
+      <Footer className="footer"></Footer>
+    </>
+    
   );
 }
 
