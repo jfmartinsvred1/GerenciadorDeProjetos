@@ -1,16 +1,24 @@
 import { Container } from 'react-bootstrap';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
-import login from '../../ApiService/ApiService';
+import { login} from '../../ApiService/ApiService';
 import { useState } from 'react';
 
- const Login =(props)=>{
+ const Login =({aoLogar})=>{
     const [username,setUsername] = useState('')
     const [password,setPassword]=useState('')
     let user = {
         username:username,
         password:password
     }
+
+    async function aoLogin(){
+        const resp = await login(user)
+        if(resp===200){
+            aoLogar(true)
+        }
+    }
+
     return(
         <Container className='p-3 w-25 bg-white rounded'>
             <Form.Group className="mb-3" controlId="formBasicEmail">
@@ -27,7 +35,7 @@ import { useState } from 'react';
             <Form.Group className="mb-3" controlId="formBasicCheckbox">
                 <Form.Check type="checkbox" label="Check me out" />
             </Form.Group>
-            <Button variant="primary" type="submit" onClick={(e)=>login(user)}>
+            <Button variant="primary" type="submit" onClick={(e)=>aoLogin()}>
                 Submit
             </Button>
         </Container>
