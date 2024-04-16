@@ -22,14 +22,22 @@ namespace Gerenciador.Controllers
         public async Task<IActionResult> RegisterUserAsync(CreateUserDto dto)
         {
             await _userDao.RegisterUser(dto);
-
-            return Ok("Criado com sucesso");
+            return Ok("CriadoComSucesso");
         }
         [HttpPost("login")]
         public async Task<IActionResult> LoginUser(LoginUserDto dto)
         {
             var token = await _userDao.LoginUser(dto);
-            return Ok(token);
+
+            if(token == "AlgoDeuErrado") 
+            {
+                return NotFound();
+            }
+            else
+            {
+                return Ok(token);
+            }
+            
         }
         [HttpPost("verifyEmail")]
         public IActionResult VerifyEmail(VerifyEmail email)

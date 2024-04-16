@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Text.Json;
 
 namespace Gerenciador.Controllers
 {
@@ -11,7 +12,7 @@ namespace Gerenciador.Controllers
         [Authorize(Policy ="EmailConfirm")]
         public IActionResult Get()
         {
-            return Ok("Acesso Permitido");
+            return Ok("'Acesso Permitido'");
         }
     }
 }

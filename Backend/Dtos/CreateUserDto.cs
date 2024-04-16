@@ -14,5 +14,18 @@ namespace Gerenciador.Dtos
         public string Password { get; set; }
         [Compare("Password")]
         public string Repassword { get; set; }
+
+        public CreateUserDto()
+        {
+            
+        }
+
+        public CreateUserDto(string username, string email, string password, string repassword)
+        {
+            Username = username;
+            Email = email;
+            Password = password;
+            Repassword = repassword;
+        }
     }
 }

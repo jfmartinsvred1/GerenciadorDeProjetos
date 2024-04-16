@@ -46,7 +46,8 @@ namespace Gerenciador.Data.EF
 
             if(resultado.Succeeded==false)
             {
-                throw new ApplicationException("Algo deu errado!");
+                //throw new ApplicationException("Algo deu errado!");
+                return "AlgoDeuErrado";
             }
 
             var user = _signInManager
