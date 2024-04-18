@@ -1,17 +1,27 @@
+import { Fragment } from "react"
+import { Link } from "react-router-dom"
+import add from '../../Imgs/adicionar-botao.png'
 import completa from '../../Imgs/verificado.png'
 import carregando from '../../Imgs/carregando.png'
 import pausado from '../../Imgs/pausa.png'
-const ActivitiesFromProject = ({activities}) => {
 
+const Atividades = ({activities}) =>{
     return (
-        <div style={{display:"flex", justifyContent:"center", marginTop:"32px"}}>
+        <Fragment>
+            <div className="d-flex justify-content-center mt-3">
+                <h1>Atividades</h1>
+            </div>
+            <Link className="mt-3 d-flex justify-content-center align-items-center" style={{textDecoration:"none"}} to="/addProject">
+                <h2 >New</h2>
+                <img src={add} width={"32px"} height={"32px"} className="m-2"></img>
+            </Link>
+            <div style={{display:"flex", justifyContent:"center", marginTop:"32px"}}>
             <table border={1}>
                 <thead border={1}>
                     <tr>
                         <td style={{padding:"16px", border:"1px solid"}}>Nome</td>
                         <td style={{padding:"16px", border:"1px solid"}}>Descrição</td>
                         <td style={{padding:"16px", border:"1px solid"}}>Status</td>
-                        <td style={{padding:"16px", border:"1px solid"}}>Worker</td>
                     </tr>
                 </thead>
                 <tbody>
@@ -31,16 +41,14 @@ const ActivitiesFromProject = ({activities}) => {
                                         :<img src={pausado} width={"32px"}></img>
                                     }
                                 </th>
-                                <th style={{padding:"16px", border:"1px solid"}}>
-                                    {activity.user.username}
-                                </th>
                             </tr>
                         )
                     })}
                 </tbody>
             </table>
         </div>
+        </Fragment>
     )
 }
 
-export default ActivitiesFromProject
+export default Atividades

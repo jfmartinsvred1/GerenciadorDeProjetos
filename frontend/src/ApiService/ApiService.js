@@ -98,4 +98,17 @@ export async function login(form){
    return resp
  }
 
+ export function getActivitiesOfUser(id){
+   const resp = fetch(`https://localhost:7147/Activity?userId=${id}`, {
+      method:'GET',
+      headers:{
+         'Content-Type': 'application/json',
+         'Accept': 'application/json',
+         'Authorization': 'Bearer ' + _token
+      }
+   })
+
+   return resp
+ }
+
  

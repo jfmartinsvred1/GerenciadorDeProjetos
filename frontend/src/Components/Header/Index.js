@@ -23,10 +23,10 @@ const Header = ({logged, user, carregar}) => {
             </Container> :
             <Container>
                 <Navbar.Brand  className='fs-2'>Gerenciador De Projetos</Navbar.Brand>
-                <Nav className="me-auto fs-4">
-                    <HeaderLink to="/" name="Home" color="black"/>
-                    <HeaderLink to="/minhasAtividades" name="Minhas Atividades" color="black"/>
-                    <HeaderLink to="/meusProjetos" name="Meus Projetos" color="black" carregar={carregar}/>
+                <Nav className="me-auto fs-4 m-3">
+                    <HeaderLink  to="/" name="Home" color="black"/>
+                    <HeaderLink  to="/minhasAtividades" name="Minhas Atividades" color="black"/>
+                    <HeaderLink  to="/meusProjetos" name="Meus Projetos" color="black" carregar={carregar}/>
                 </Nav>
                 <h4>Olá, {user.username}</h4>
             </Container>
