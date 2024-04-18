@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Gerenciador.Dtos;
 using Gerenciador.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace Gerenciador.Data.EF
 {
@@ -25,7 +26,7 @@ namespace Gerenciador.Data.EF
 
         public ICollection<ReadProjectDto> GetAll(string managerId)
         {
-            ICollection<ReadProjectDto> projects = _mapper.Map<ICollection<ReadProjectDto>>(_context.Projects.Where(id=>id.ManagerId==managerId).ToList()); ;
+            ICollection<ReadProjectDto> projects = _mapper.Map<ICollection<ReadProjectDto>>(_context.Projects.Where(id => id.ManagerId == managerId).ToList());
             return projects;
         }
     }

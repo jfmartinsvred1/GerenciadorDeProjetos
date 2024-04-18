@@ -20,6 +20,11 @@ namespace Gerenciador.Controllers
         {
             return _activityDao.GetActivitysWithUser(userId);
         }
+        [HttpGet("/WithProject")]
+        public ICollection<ReadActivityDto> GetAllWhithProject(string projectId)
+        {
+            return _activityDao.GetActivitysWithProject(projectId);
+        }
         [HttpPost]
         public IActionResult CreateActivity(CreateActivityDto activity)
         {

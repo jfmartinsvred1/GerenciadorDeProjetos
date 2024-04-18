@@ -25,7 +25,8 @@ namespace Gerenciador.Data.EF
 
         public ICollection<ReadActivityDto> GetActivitysWithProject(string projectId)
         {
-            throw new NotImplementedException();
+            var activyties = _context.Activities.Where(ativ => ativ.ProjectId == projectId).Include(s=>s.State).Include(user=>user.User).ToList();
+            return _mapper.Map<List<ReadActivityDto>>(activyties);
         }
 
         public ICollection<ReadActivityDto> GetActivitysWithUser(string userId)
