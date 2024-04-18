@@ -11,6 +11,7 @@ import Projetos from './Components/Projetos';
 import { getActivitiesOfUser, returnProjects } from './ApiService/ApiService';
 import ActivitiesFromProject from './Components/ActivitiesFromProject';
 import Atividades from './Components/Atividades';
+import EmailConfirmation from './Components/EmailConfirmation';
 
 function App() {
   
@@ -31,6 +32,18 @@ function App() {
     setIsLogged(param)
     setUser(decodeToken(sessionStorage.getItem('token')))
   }
+
+  async function aoCadastrar(param){
+    await aoLogar(param)
+    
+    if(user.emailconfirmed==="False"){
+      //Ir para tela de confirmacao
+    }
+    else{
+      //ir para home logado
+    }
+  }
+
 
   useEffect(()=>{
     if(user===''){
@@ -62,10 +75,11 @@ function App() {
           <Route path="/" element={<div><h1>Home</h1></div>}/>
           <Route path='/sobre' element={<h1>Sobre</h1>}/>
           <Route path="/login" element={<Login aoLogar={aoLogar}/>}/>
-          <Route path="/cadastro" element={<Cadastro></Cadastro>} />
+          <Route path="/cadastro" element={<Cadastro aoCadastrar={aoCadastrar}></Cadastro>} />
           <Route path='/meusProjetos' element={isLogged ?<Projetos projetos={projetos} showActivity={showActivitiesFromProject}/> : <Login aoLogar={aoLogar}/>}/>
           <Route path='/minhasAtividades' element={isLogged ?<Atividades activities={activitiesWithUser}></Atividades> : <Login aoLogar={aoLogar}/>}/>
           <Route path='/activitiesOfProject' element={<ActivitiesFromProject activities={activitiesWithProject}/>}/>
+          <Route path='/emailConfirmation' element={<EmailConfirmation></EmailConfirmation>}/>
           <Route path='*' element={<h1>Pagina n encontrada</h1>}/>
         </Routes>
         <Footer className="footer"></Footer>
