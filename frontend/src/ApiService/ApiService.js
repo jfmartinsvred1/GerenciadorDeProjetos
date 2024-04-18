@@ -55,4 +55,47 @@ export async function login(form){
    console.log(data)
  }
 
+ export function returnProjects(id){
+   const resp = fetch(`https://localhost:7147/Project?managerId=${id}`,{
+      method:'GET',
+      headers:{
+         'Content-Type': 'application/json',
+         'Accept': 'application/json',
+         'Authorization': 'Bearer ' + _token
+      }
+
+      
+   })
+
+   return resp
+ }
+ export function returnActivitiesOfProject(id){
+   const resp = fetch(`https://localhost:7147/WithProject?projectId=${id}`,{
+      method:'GET',
+      headers:{
+         'Content-Type': 'application/json',
+         'Accept': 'application/json',
+         'Authorization': 'Bearer ' + _token
+      }
+
+      
+   })
+
+   return resp
+ }
+ export function getWorkers(id){
+   const resp = fetch(`https://localhost:7147/ProjectUser?projectId=${id}`,{
+      method:'GET',
+      headers:{
+         'Content-Type': 'application/json',
+         'Accept': 'application/json',
+         'Authorization': 'Bearer ' + _token
+      }
+
+      
+   })
+
+   return resp
+ }
+
  
