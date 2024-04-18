@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Gerenciador.Migrations
 {
     [DbContext(typeof(GerenciadorContext))]
-    [Migration("20240331205240_activities")]
-    partial class activities
+    [Migration("20240418155427_activities-users")]
+    partial class activitiesusers
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -27,9 +27,8 @@ namespace Gerenciador.Migrations
 
             modelBuilder.Entity("Gerenciador.Models.Activity", b =>
                 {
-                    b.Property<Guid>("ActivityId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("char(36)");
+                    b.Property<string>("ActivityId")
+                        .HasColumnType("varchar(255)");
 
                     b.Property<string>("Description")
                         .IsRequired()
@@ -54,8 +53,7 @@ namespace Gerenciador.Migrations
 
                     b.HasIndex("StateId");
 
-                    b.HasIndex("UserId")
-                        .IsUnique();
+                    b.HasIndex("UserId");
 
                     b.ToTable("Activities");
                 });
@@ -343,8 +341,8 @@ namespace Gerenciador.Migrations
                         .HasForeignKey("StateId");
 
                     b.HasOne("Gerenciador.Models.User", "User")
-                        .WithOne("Activity")
-                        .HasForeignKey("Gerenciador.Models.Activity", "UserId");
+                        .WithMany("Activities")
+                        .HasForeignKey("UserId");
 
                     b.Navigation("Project");
 
@@ -433,8 +431,7 @@ namespace Gerenciador.Migrations
 
             modelBuilder.Entity("Gerenciador.Models.User", b =>
                 {
-                    b.Navigation("Activity")
-                        .IsRequired();
+                    b.Navigation("Activities");
 
                     b.Navigation("ProjectsUsers");
                 });

@@ -50,8 +50,7 @@ namespace Gerenciador.Migrations
 
                     b.HasIndex("StateId");
 
-                    b.HasIndex("UserId")
-                        .IsUnique();
+                    b.HasIndex("UserId");
 
                     b.ToTable("Activities");
                 });
@@ -339,8 +338,8 @@ namespace Gerenciador.Migrations
                         .HasForeignKey("StateId");
 
                     b.HasOne("Gerenciador.Models.User", "User")
-                        .WithOne("Activity")
-                        .HasForeignKey("Gerenciador.Models.Activity", "UserId");
+                        .WithMany("Activities")
+                        .HasForeignKey("UserId");
 
                     b.Navigation("Project");
 
@@ -429,8 +428,7 @@ namespace Gerenciador.Migrations
 
             modelBuilder.Entity("Gerenciador.Models.User", b =>
                 {
-                    b.Navigation("Activity")
-                        .IsRequired();
+                    b.Navigation("Activities");
 
                     b.Navigation("ProjectsUsers");
                 });
